@@ -30,8 +30,8 @@
           </tr>
         </tbody>
         <div class="tableButtons">
-          <button @click="strokeMinus" class="strokeMinus">-</button>
-          <button @click="strokePlus" class="strokePlus">+</button>
+          <button @click="strokeMinus(item.id)" class="strokeMinus">-</button>
+          <button @click="strokePlus(item.id)" class="strokePlus">+</button>
         </div>
       </table>
     </div>
@@ -76,15 +76,22 @@ export default {
       this.tableHead.push(tableElem)
       console.log(this.tableHead)
     },
-    strokeMinus() {
+    strokeMinus(id) {
       if (this.strokes) {
         this.strokes -= 1
       }
-      console.log(this.strokes)
+      this.tableHead.forEach(e => {
+        if (id === e.id) {
+          e.strokes -= 1
+        }
+      })
     },
-    strokePlus() {
-      this.strokes = this.strokes + 1
-      console.log(this.strokes, typeof(this.strokes))
+    strokePlus(id) {
+      this.tableHead.forEach(e => {
+        if (id === e.id) {
+          e.strokes += 1
+        }
+      })
     }
   }
 }
